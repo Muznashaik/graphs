@@ -1,0 +1,22 @@
+graph = { 
+    'a': ['c'], 
+    'b': ['d'], 
+    'c': ['e'], 
+    'd': ['a', 'd'], 
+    'e': ['b', 'c'] 
+} 
+
+#function to generate all possible paths from one node to another
+
+def find_graph(graph,start,end,path=[]):
+    path=path+[start]
+    if start==end:
+        return path
+    paths=[]
+    for node in graph[start]:
+        if node not in path:
+            newpath=find_graph(graph,node,end,path)
+        for i in newpath:
+            paths.append(i)
+    return paths
+print(find_graph(graph,'d','c'))
