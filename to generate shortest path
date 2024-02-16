@@ -1,0 +1,23 @@
+graph = { 
+    'a': ['c'], 
+    'b': ['d'], 
+    'c': ['e'], 
+    'd': ['a', 'd'], 
+    'e': ['b', 'c'] 
+} 
+
+#function to find shortest path
+
+def find_graph(graph,start,end,path=[]):
+    path=path+[start]
+    if start==end:
+        return path
+    shortestpath=None
+    for node in graph[start]:
+        if node not in path:
+            newpath=find_graph(graph,node,end,path)
+            if newpath:
+                if not shortestpath or len(newpath)<len(shortestpath):
+                    shortestpath=newpath
+    return shortestpath
+print(find_graph(graph,'d','c'))
