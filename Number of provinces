@@ -1,0 +1,22 @@
+from collections import defaultdict
+class Solution:
+    def dfs(self,V,graph,visited):
+        visited[V]=True
+        for i in graph[V]:
+            if not visited[i]:
+                self.dfs(i,graph,visited)
+        
+    def numProvinces(self, adj, V):
+        graph=defaultdict(list)
+        for i in range(V):
+            for j in range(V):
+                if adj[i][j]==1:
+                    graph[i].append(j)
+        provinces=0
+        visited=[False]*V
+        for i in range(V):
+            if not visited[i]:
+                provinces+=1
+                self.dfs(i,graph,visited)
+        return provinces
+            
