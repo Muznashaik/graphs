@@ -1,0 +1,12 @@
+def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        def dfs(r,c):
+            if  not (0<=r<len(image)  and 0<=c<len(image[0])) or  image[r][c]!=StartColour:
+                return
+            image[r][c]=color
+            for dr,dc in [(1,0),(-1,0),(0,1),(0,-1)]:
+                dfs(r+dr,c+dc)
+        StartColour=image[sr][sc]
+        if StartColour==color:
+            return image
+        dfs(sr,sc)
+        return  image
